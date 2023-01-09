@@ -1,0 +1,83 @@
+<h1>Pipes personalizados</h1>
+<p>Pipes creados por mi.</p>
+
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <div class="flex align-items-center gap-3">
+      <button
+        pButton
+        label="Toggle mayusculas"
+        class="mr-1 p-button-warning"
+        (click)="change()"
+      ></button>
+      {{ "frase de prueba" | customUppercase : isUppercase }}
+    </div>
+  </div>
+
+  <div class="p-toolbar-group-end">
+    <button
+      pButton
+      icon="pi pi-sort"
+      label="Por nombre"
+      class="mr-1"
+      (click)="changeOrder('name')"
+    ></button>
+    <button
+      pButton
+      icon="pi pi-sort"
+      label="Vuela"
+      class="mr-1 p-button-success"
+      (click)="changeOrder('flying')"
+    ></button>
+    <button
+      pButton
+      icon="pi pi-sort"
+      label="Por color"
+      class="p-button-help"
+      (click)="changeOrder('color')"
+    ></button>
+  </div>
+</p-toolbar>
+<div class="mt-3">
+  <p-table [value]="heroes | sorting : orderBy">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Vuela</th>
+        <th>Color</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-heroe>
+      <tr>
+        <td>{{ heroe.name }}</td>
+        <td>{{ heroe.flying | fly | titlecase }}</td>
+        <td>{{ heroe.color }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div class="mt-3">
+  <p-table [value]="heroes">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          Nombre <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="flying">
+          Vuela <p-sortIcon field="flying"></p-sortIcon>
+        </th>
+        <th pSortableColumn="color">
+          Color <p-sortIcon field="color"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-heroe>
+      <tr>
+        <td>{{ heroe.name }}</td>
+        <td>{{ heroe.flying | fly | titlecase }}</td>
+        <td>{{ heroe.color }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
